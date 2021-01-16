@@ -8,11 +8,11 @@
         <version>2.4.2</version>
         <relativePath/>
     </parent>
-    <groupId>com.mghita.presentation.transactional</groupId>
-    <artifactId>propagation</artifactId>
+    <groupId>com.mghita.presentation</groupId>
+    <artifactId>transactional</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>propagation</name>
-    <description>Demo project for Transactional Propagation Presentation</description>
+    <name>transactional</name>
+    <description>Demo project for Spring Transactional Presentation</description>
 
     <properties>
         <java.version>1.8</java.version>
