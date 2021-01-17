@@ -1,14 +1,12 @@
 package com.mghita.presentation.transactional.intro.service;
 
-import com.mghita.presentation.transactional.intro.repository.UserRepository;
 import com.mghita.presentation.transactional.intro.model.User;
+import com.mghita.presentation.transactional.intro.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -20,9 +18,10 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-//    @SneakyThrows //do not use it with @Transactional
+    //    @SneakyThrows // do not use it with @Transactional
     @Transactional
     public User addUser(User user) throws Exception {
+        System.out.println(this.getClass()); // UserService.class
         User savedUser = this.userRepository.save(user);
         if (user.getCareer() == null) {
             throw new RuntimeException("rollback");
@@ -32,16 +31,16 @@ public class UserService {
     }
 
     @Transactional
-    public User editUser(Integer id, User userDTO) { //start transaction
+    public User editUser(Integer id, User userDTO) { // start transaction
         User user = getUser(id);
-        user.setFirstName(userDTO.getFirstName()); //this.userRepository.findAll()
+        user.setFirstName(userDTO.getFirstName()); // this.userRepository.findAll()
         user.setLastName(userDTO.getLastName());
         user.setCareer(userDTO.getCareer());
         if (user.getCareer() != null) {
-            this.userRepository.save(user); //saved or not?
+            this.userRepository.save(user); // saved or not?
         }
         return user;
-    }//commit transaction
+    } // commit transaction
 
     private User getUser(Integer id) {
 //        return this.userRepository.findOneById(id);
