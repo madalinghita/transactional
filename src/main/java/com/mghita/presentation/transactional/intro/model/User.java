@@ -1,4 +1,4 @@
-package com.mghita.presentation.transactional.propagation.model;
+package com.mghita.presentation.transactional.intro.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
-package com.mghita.presentation.transactional.propagation.controller;
+package com.mghita.presentation.transactional.intro.controller;
 
-import com.mghita.presentation.transactional.propagation.model.User;
-import com.mghita.presentation.transactional.propagation.service.UserService;
+import com.mghita.presentation.transactional.intro.model.User;
+import com.mghita.presentation.transactional.intro.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User addUser(@RequestBody User user) {
+    public User addUser(@RequestBody User user) throws Exception {
         return this.userService.addUser(user);
     }
 
