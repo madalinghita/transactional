@@ -24,7 +24,7 @@ public class UserService {
 //    @Transactional(noRollbackFor = SQLException.class)
 //    @Transactional(rollbackFor = SQLException.class)
     @Transactional
-    public User addUser(User user) {
+    public User addUser(User user) throws Exception {
         System.out.println(this.getClass()); // UserService.class
         User savedUser = this.userRepository.save(user);
         if (user.getCareer() == null) {
