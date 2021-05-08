@@ -3,9 +3,11 @@ package com.mghita.presentation.transactional.intro.service;
 import com.mghita.presentation.transactional.intro.model.User;
 import com.mghita.presentation.transactional.intro.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,16 +20,16 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    //    @SneakyThrows // do not use it with @Transactional
-//    @Transactional(rollbackFor = Exception.class)
-//    @Transactional(noRollbackFor = RuntimeException.class)
+//    @SneakyThrows // do not use it with @Transactional
+//    @Transactional(noRollbackFor = SQLException.class)
+//    @Transactional(rollbackFor = SQLException.class)
     @Transactional
-    public User addUser(User user) throws Exception {
+    public User addUser(User user) {
         System.out.println(this.getClass()); // UserService.class
         User savedUser = this.userRepository.save(user);
         if (user.getCareer() == null) {
             throw new RuntimeException("rollback for unchecked exceptions");
-//            throw new Exception("no rollback for checked exceptions");
+//            throw new SQLException("no rollback for checked exceptions");
         }
         return savedUser;
     }
