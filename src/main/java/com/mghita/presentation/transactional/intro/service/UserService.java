@@ -19,20 +19,26 @@ public class UserService {
     }
 
     //    @SneakyThrows // do not use it with @Transactional
+//    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(noRollbackFor = RuntimeException.class)
     @Transactional
     public User addUser(User user) throws Exception {
         System.out.println(this.getClass()); // UserService.class
         User savedUser = this.userRepository.save(user);
         if (user.getCareer() == null) {
-            throw new RuntimeException("rollback");
-//            throw new Exception("rollback");
+            throw new RuntimeException("rollback for unchecked exceptions");
+//            throw new Exception("no rollback for checked exceptions");
         }
         return savedUser;
     }
 
+    public User addUserInternally(User user) throws Exception {
+        return addUser(user);
+    }
+
     @Transactional
     public User editUser(Integer id, User userDTO) { // start transaction
-        User user = getUser(id);
+        User user = getUser(id); // persisted or not?
         user.setFirstName(userDTO.getFirstName()); // this.userRepository.findAll()
         user.setLastName(userDTO.getLastName());
         user.setCareer(userDTO.getCareer());
@@ -43,7 +49,7 @@ public class UserService {
     } // commit transaction
 
     private User getUser(Integer id) {
-//        return this.userRepository.findOneById(id);
+//        return this.userRepository.findOneById(id); // readOnly = true
         return this.userRepository.findById(id).get();
     }
 }

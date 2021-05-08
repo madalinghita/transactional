@@ -22,7 +22,7 @@ public class UserController {
     @PostMapping
     public User addUser(@RequestBody User user) throws Exception {
         System.out.println(userService.getClass()); // UserService.class ?? NO // UserService$$EnhancerBySpringCGLIB$$9ab2b162
-        return this.userService.addUser(user);
+        return this.userService.addUserInternally(user);
     }
 
     @PutMapping(path = "/{id}")
