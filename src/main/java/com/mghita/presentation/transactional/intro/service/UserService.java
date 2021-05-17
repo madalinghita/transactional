@@ -21,7 +21,7 @@ public class UserService {
     }
 
 //    @SneakyThrows // do not use it with @Transactional
-//    @Transactional(noRollbackFor = SQLException.class)
+//    @Transactional(noRollbackFor = RuntimeException.class)
 //    @Transactional(rollbackFor = SQLException.class)
     @Transactional
     public User addUser(User user) throws Exception {
