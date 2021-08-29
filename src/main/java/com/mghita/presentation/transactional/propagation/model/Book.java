@@ -1,23 +1,24 @@
 package com.mghita.presentation.transactional.propagation.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "products")
+@Table(name = "books")
 @Entity
-public class Product {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer bookId;
 
-    private String name;
+    private String title;
 
-    private Double price;
+    private String isbn;
+
+    private Integer publishYear;
 }
