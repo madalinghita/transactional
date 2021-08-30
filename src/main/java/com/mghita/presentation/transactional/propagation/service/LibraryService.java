@@ -14,10 +14,9 @@ public class LibraryService {
     private final LibraryRepository libraryRepository;
 
     public Library getLibrary(Integer libraryId) {
-        return this.libraryRepository.findByLibraryId(libraryId); // start new transaction ?
+        return this.libraryRepository.findByLibraryId(libraryId); // When the transaction commits, entities managed by the persistence context become detached
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
     public Library addLibrary(Library library) {
         return this.libraryRepository.save(library); // Transactional - Propagation.REQUIRED => CRUD methods on repository instances inherited from SimpleJpaRepository
     }
@@ -26,6 +25,6 @@ public class LibraryService {
     public void deleteOldBooks(Integer libraryId, int minPublishYear) {
         Library library = getLibrary(libraryId);
         library.getBooks().removeIf(book -> book.getPublishYear() > minPublishYear);
-        // changes are saved ?
+        // Changes are saved ?
     }
 }

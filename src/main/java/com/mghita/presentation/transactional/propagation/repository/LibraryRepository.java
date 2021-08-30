@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface LibraryRepository extends JpaRepository<Library, Integer> {
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED) // REQUIRED, REQUIRES_NEW, MANDATORY, NOT_SUPPORTED
     Library findByLibraryId(Integer libraryId);
 }
